@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="proposalScene" class="scene active">
+    <h1 id="question">Good things take time…especially love 💘<br>So allow me to ask:</h1>
+    <h2>Will you be my Valentine? 💖</h2>
+    <div class="buttons">
+      <button id="yesBtn">YES 😍</button>
+      <button id="noBtn">NO 🙃</button>
+    </div>
+
+    <!-- Speech bubble -->
+    <div id="speechBubble" class="hidden"></div>
+  </div>
+
+  <div id="heartScene" class="scene">
+    <div id="heartHint" class="heart-hint">
+      Tap the hearts ❤️
+    </div>
+    <div id="progressBox" class="progress">
+      ❤️ 0 / 12 memories discovered
+    </div>
+    <div id="heartContainer"></div>
+    <audio id="popSound" src="audio/soundreality-pop-reverb-423718.mp3" preload="auto"></audio>
+  </div>
+  
+  <!--  Cinematic Section -->
+  <div id="letterScene" class="scene">
+    <p id="typedText"></p>
+    <audio id="bgMusic" src="audio/Post_Malone_-_I_m_Sold_(Official_Video)(M4A_128K).m4a"></audio>
+    <button id="continueBtn" class="continue hidden">Continue ❤️</button>
+  </div>
+
+  <div id="videoScene" class="scene">
+    <p id="videoLoveText" class="video-love hidden">
+      I love You❤️
+    </p>
+    <div class="video-wrapper">
+      <video id="loveVideo" controls>
+        <source src="video/babe.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button id="finishBtn" class="continue hidden">Finish ❤️</button>
+  </div>
+
+  <div id="finalScene" class="scene">
+  <h3>This is how much you mean to me ❤️</h3>
+
+  <p id="codeCount"></p>
+
+  <p class="the-end">THE END 💖</p>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
