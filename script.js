@@ -277,7 +277,7 @@ function showVideo() {
 }
 
 
-const totalLinesWritten = 792; 
+const totalLinesWritten = 826; 
 
 function showFinalScene() {
   showScene("finalScene");
@@ -336,4 +336,5 @@ document.getElementById("finishBtn").addEventListener("click", () => {
 });
 
 // Force the app to begin at proposal every time
+
 showScene("proposalScene");
