@@ -1,0 +1,409 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ffdde1, #f16475);
+  min-height: 100svh;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#proposalScene {
+  display: flex;
+  flex-direction: column;   /* 🔥 THIS is the fix */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;                /* spacing between items */
+  position: relative;
+  z-index: 10;
+}
+
+.scene {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color:#2b0035
+}
+
+h2 {
+  color: #b8005c;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 480px) {
+  button {
+    padding: 18px 30px;
+    font-size: 1.2rem;
+  }
+
+  .heart {
+    font-size: 44px;
+  }
+
+  #typedText {
+    font-size: 1.2rem;
+    padding: 0 20px;
+  }
+}
+
+.buttons {
+  margin-top: 30px;
+  position: relative;
+  font-size: 1.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  padding: 15px 25px;
+  font-size: 18px;
+  border: 1px solid;
+  border-radius: 30px;
+  cursor: pointer;
+
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+#yesBtn {
+  background-color: #ff4d6d;
+  color: white;
+
+}
+
+#noBtn {
+  width: 120px;
+  height: 50px;
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: none !important;
+  transition: left 0.3s ease, top 0.3s ease;
+  z-index: 5;
+}
+
+
+#yesBtn.glow {
+  box-shadow: 0 0 20px #ff4d6d;
+  transform: scale(1.1);
+}
+
+#speechBubble {
+  margin-top: 20px;
+  background: white;
+  padding: 10px 15px;
+  border: 1px solid #b8005c;
+  border-radius: 20px;
+  display: inline-block;
+  color: #333;
+
+  position: relative;
+  z-index: 20;
+}
+
+#heartContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+   z-index: 9999; /* 👈 THIS is the key */
+}
+
+/* Floating heart */
+
+.heart-hint {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  font-size: 18px;
+  z-index: 99999;   /* 👈 unbeatable */
+  pointer-events: none;
+}
+
+@keyframes fadePulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.progress {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 2000;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+
+  font-size: 36px;          /* Bigger = easier tap/click*/
+  color: #ff2f6d;           /* Strong pink */
+  text-shadow: 0 0 10px rgba(255, 0, 100, 0.6);
+  padding: 5px; /* invisble hitbox */
+  pointer-events: none;  
+  animation: floatUp 9s linear forwards;
+
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.heart-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 25%;   /* keep it heart-ish / round */
+
+  clip-path: path("M60 20 C60 -10 0 -10 0 40 C0 80 60 110 60 110 C60 110 120 80 120 40 C120 -10 60 -10 60 20 Z");
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.heart-photo.large {
+  width: 140px;
+  height: 140px;
+  animation: photoZoom 0.35s ease-out;
+  
+}
+
+.revealed-photo {
+  pointer-events: none;
+  transform: scale(0.9);
+  opacity: 0.9;
+}
+
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+
+/* ========== CINEMATIC MOOD ========== */
+
+#letterScene.active {
+  gap: 20px;
+}
+
+#letterScene.active,
+#videoScene.active {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(circle at center, #2b0035, #000);
+  backdrop-filter: blur(6px);
+
+  color: white;
+}
+
+
+#typedText {
+  max-width: 600px;
+  max-height: 55vh;
+  width: min(92vw, 600px);
+  margin: auto;
+  overflow-y: auto;
+  padding-right: 10px;
+
+  font-size: 20px;
+  line-height: 1.8;
+  white-space: pre-line;
+  text-align: center;
+  animation: fadeIn 1s ease;
+  scroll-behavior: smooth;
+}
+
+#loveVideo {
+  width: min(92vw, 420px);
+  height: auto;
+  max-width: 400px;
+  margin-top: 25px;
+  border-radius: 12px;
+  align-self: center;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Zoom In/Out Photo settings */
+.zoom-normal {
+  transform: scale(1);
+}
+
+/* Zoom OUT (show more of the image) */
+.zoom-out {
+  transform: scale(0.85);
+}
+
+.zoom-out-more { transform: scale(0.75); }
+
+/* Zoom IN (crop tighter) */
+.zoom-in {
+  transform: scale(1.15);
+}
+
+.zoom-in-more  { transform: scale(1.25); }
+
+@keyframes photoZoom {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.video-love {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 22px;
+  color: white;
+  text-shadow: 0 0 15px rgba(255,255,255,0.6);
+
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.video-love.show {
+  opacity: 1;
+}
+
+
+#finalScene {
+  color: white;
+  text-align: center;
+  gap: 20px;
+}
+
+.the-end {
+  margin-top: 30px;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+
+/* --- ANIMATIONS --- */
+
+/* YES button animations*/
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+#yesBtn.pulse {
+  animation: pulse 1s infinite;
+}
+
+/* Heart-based animations*/
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.heart-pop {
+  animation: pop 0.2s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.4); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.photo-reveal img {
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.continue {
+  margin-top: 20px;
+  padding: 10px 18px;
+  font-size: 16px;
+  border-radius: 20px;
+}
