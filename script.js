@@ -143,7 +143,6 @@ function revealHeartSurprise(heart) {
   pop.currentTime = 0;
   pop.play();
   heart.style.animation = "pop 0.3s ease";
-  pointer-events: none;
   
   // if that was the final memory → roll cinema
   if (photoBag.length === 0 && !heartsFinished) {
@@ -294,5 +293,6 @@ document.getElementById("continueBtn").addEventListener("click", () => {
 
 // Force the app to begin at proposal every time
 showScene("proposalScene");
+
 
 
